@@ -1,0 +1,40 @@
+fb-name-tool./**
+ * Facebook Name Changer Script 2026
+ * Note: Use this only for educational purposes.
+ */
+
+async function changeFbName(newName, fbDtsg, userId) {
+    const url = "https://accountscenter.facebook.com/api/graphql/";
+    
+    // Modern 2026 GraphQL Mutation for Name Change
+    const variables = JSON.stringify({
+        client_mutation_id: crypto.randomUUID(),
+        family_device_id: "device_id_fetch_datr",
+        identity_id: userId,
+        new_name: newName, // Aapka Stylish Name
+        interface: "FB_WEB"
+    });
+
+    const params = new URLSearchParams({
+        'fb_dtsg': fbDtsg,
+        '__user': userId,
+        'variables': variables,
+        'doc_id': '9388416374608398' // Verify this ID from Network Tab
+    });
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: params,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        const result = await response.json();
+        console.log("Response:", result);
+        alert("Check your profile, Name might have updated!");
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
