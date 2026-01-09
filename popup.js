@@ -1,7 +1,7 @@
 document.getElementById('run').onclick = async () => {
-    let [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     
-    // Agar URL detect na ho tab bhi script chal jaye
+    // Direct script execute karein taake URL ka masla na ho
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         files: ['script.js']
