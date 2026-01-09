@@ -6,3 +6,15 @@
     <script src="popup.js"></script>
 </body>
 </html>
+document.getElementById('run').onclick = async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    if (tab.url.includes("facebook.com")) {
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            files: ['script.js']
+        });
+    } else {
+        alert("Pehle Facebook open karein!");
+    }
+};
