@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html>
-<body style="width: 200px; padding: 10px; text-align: center;">
+<head>
+    <style>
+        body { width: 200px; padding: 10px; text-align: center; font-family: sans-serif; }
+        button { width: 100%; padding: 10px; background: blue; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
     <h3>FB Changer</h3>
-    <button id="run" style="width: 100%; padding: 10px; background: blue; color: white; border: none; border-radius: 5px;">Ubah Nama</button>
+    <button id="run">Ubah Nama</button>
     <script src="popup.js"></script>
 </body>
 </html>
-document.getElementById('run').onclick = async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    
-    if (tab.url.includes("facebook.com")) {
-        chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            files: ['script.js']
-        });
-    } else {
-        alert("Pehle Facebook open karein!");
-    }
-};
